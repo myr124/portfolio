@@ -6,14 +6,14 @@ import React, { useRef, useState } from "react";
 
 const MyMesh = () => {
     const meshMat = React.useRef(null)
-    const [color, setcolor] = useState("blue")
     useFrame(() => {
-        meshMat.current.rotation.x = 0.1
+        meshMat.current.rotation.x += 0.01
+        meshMat.current.rotation.y += 0.01
     })
     return (
-        <mesh onClick={() => { setcolor("red") }}>
-            <boxGeometry position={[0, 0, 0]} args={[10, 10, 10]}></boxGeometry>
-            <meshStandardMaterial ref={meshMat} color={color}  ></meshStandardMaterial>
+        <mesh ref={meshMat}>
+            <boxGeometry position={[0, 0, 0]} args={[20, 20, 20]}></boxGeometry>
+            <meshStandardMaterial color="red"  ></meshStandardMaterial>
         </mesh>
     )
 }
@@ -21,7 +21,7 @@ const MyMesh = () => {
 
 export default function Home() {
     return (
-        <div>
+        <div className="h-full">
             <Canvas camera={{ position: [10, 10, 10] }}>
                 <MyMesh></MyMesh>
                 <ambientLight intensity={0.9} />
